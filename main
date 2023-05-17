@@ -1,0 +1,48 @@
+// ConsoleApplication5.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	char word[21], shift[21], x;
+	int counter, stringLength, key;
+
+	cout << "Input a word to be ciphered: ";
+	cin.getline(word, 21);
+	stringLength = sizeof(word);
+
+	cout << "Input the key: ";
+	cin >> key;
+	cout << endl;
+
+	for (counter = 0; counter < stringLength; counter++)
+	{
+		x = word[counter];
+		if (x >= 'a' && x <= 'z') 
+		{
+			x = x + key;
+			if (x > 'z')
+			{
+				x = x - 'z' + 'a' - 1;
+			}
+			shift[counter] = x;
+		}
+		else if (x >= 'A' && x <= 'Z') 
+		{
+			x = x + key;
+			if (x > 'Z') 
+			{
+				x = x - 'Z' + 'A' - 1;
+			}
+			shift[counter] = x;
+		}
+
+		cout << "Your ciphered text is: " << shift[21];
+
+		}
+
+	return 0;
+
+}
