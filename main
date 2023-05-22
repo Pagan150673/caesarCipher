@@ -1,4 +1,4 @@
-// ConsoleApplication5.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
 //
 
 #include <iostream>
@@ -6,43 +6,103 @@ using namespace std;
 
 int main()
 {
-	char word[21], shift[21], x;
-	int counter, stringLength, key;
+	char letter, shift;
+	string word;
+	int counter, stringLength, key, menuChoice, contChoice;
 
-	cout << "Input a word to be ciphered: ";
-	cin.getline(word, 21);
-	stringLength = sizeof(word);
+	do {
 
-	cout << "Input the key: ";
-	cin >> key;
-	cout << endl;
+		system("cls");
+		cout << "Caesar Cipher Encoder/Decoder" << endl;
+		cout << "1 - Encode a message" << endl;
+		cout << "2 - Decode a message" << endl;
+		cout << "0 - Exit" << endl;
+		cout << "Selection: ";
+		cin >> menuChoice;
 
-	for (counter = 0; counter < stringLength; counter++)
-	{
-		x = word[counter];
-		if (x >= 'a' && x <= 'z') 
+		switch (menuChoice)
 		{
-			x = x + key;
-			if (x > 'z')
+		case 1:
+			cout << "Input a word to be ciphered: ";
+			cin >> word;
+			stringLength = word.size();
+
+			cout << "Input the key: ";
+			cin >> key;
+			cout << endl;
+
+			for (counter = 0; counter < stringLength; counter++)
 			{
-				x = x - 'z' + 'a' - 1;
+				letter = word[counter];
+				if (letter >= 'a' && letter <= 'z')
+				{
+					letter = letter + key;
+					if (letter > 'z')
+					{
+						letter = letter - 'z' + 'a' - 1;
+					}
+					word[counter] = letter;
+				}
+				else if (letter >= 'A' && letter <= 'Z')
+				{
+					letter = letter + key;
+					if (letter > 'Z')
+					{
+						letter = letter - 'Z' + 'A' - 1;
+					}
+					word[counter] = letter;
+				}
+
 			}
-			shift[counter] = x;
-		}
-		else if (x >= 'A' && x <= 'Z') 
-		{
-			x = x + key;
-			if (x > 'Z') 
+
+			cout << "Your ciphered text is: " << word << endl;
+			cout << endl;
+			break;
+
+		case 2:
+			cout << "Input a word to be deciphered: ";
+			cin >> word;
+			stringLength = word.size();
+
+			cout << "Input the key: ";
+			cin >> key;
+			cout << endl;
+
+			for (counter = 0; counter < stringLength; counter++)
 			{
-				x = x - 'Z' + 'A' - 1;
+				letter = word[counter];
+				if (letter >= 'a' && letter <= 'z')
+				{
+					letter = letter - key;
+					if (letter < 'a')
+					{
+						letter = letter + 'z' - 'a' + 1;
+					}
+					word[counter] = letter;
+				}
+				else if (letter >= 'A' && letter <= 'Z')
+				{
+					letter = letter - key;
+					if (letter < 'A')
+					{
+						letter = letter + 'Z' - 'A' + 1;
+					}
+					word[counter] = letter;
+				}
+
 			}
-			shift[counter] = x;
-		}
 
-		cout << "Your ciphered text is: " << shift[21];
+			cout << "Your deciphered text is: " << word << endl;
+			cout << endl;
+			break;
 
-		}
+		case 0:
+			return 0;
+		} 
 
-	return 0;
-
+		cout << "Do you want to cipher or decipher another word?" << endl;
+		cout << "1 - Continue" << endl;
+		cout << "2 - Exit" << endl;
+		cin >> contChoice;
+	} while (contChoice != 2);
 }
